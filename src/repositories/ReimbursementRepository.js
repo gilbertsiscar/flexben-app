@@ -37,10 +37,8 @@ class ReimbursementRepository {
   }
 
   // ¯\_(ツ)_/¯
-  searchByEmployeeDetails(filters = {}) {
-    let sql = `SELECT fr.*, fd.* FROM flex_reimbursement fr 
-      JOIN flex_reimbursement_details fd ON fr.flex_reimbursement_id = fd.flex_reimbursement_id 
-      JOIN employee e ON e.employee_id = fr.employee_id`;
+  findByEmployeeDetails(filters = {}) {
+    let sql = `SELECT r.* from reimbursement r JOIN employee e ON r.employee_id = e.employee_id`;
 
     const params = [];
     const parsedFilters = Object.keys(filters).filter((filter) => {

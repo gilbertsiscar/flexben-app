@@ -13,7 +13,16 @@ const ApprovalReimbursement = ({ reimbursementRepository }) => {
       throw new Error('Invalid decision');
     }
 
-    return reimbursementRepository.updateStatus(id, decisions.get(decision));
+    if (reimbursement.reimbursement_status === 'DRAFT') {
+      throw new Error('Reimbursement should be submitted before approval');
+    }
+
+    if (reimbursement.reimbursement_status === decisions.get(decision)) {
+      throw new Error(`Reimbursement is already ${decision}`);
+    }
+
+    await reimbursementRepository.updateStatus(id, decisions.get(decision));
+    return 'Reimbursement is ${decision}';
   };
 };
 

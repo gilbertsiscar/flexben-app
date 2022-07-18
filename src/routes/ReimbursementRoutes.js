@@ -5,6 +5,7 @@ const {
   fileController,
   viewController,
   approveController,
+  searchByEmployeeController,
 } = require('../controllers/ReimbursementController');
 const {
   addItemController,
@@ -14,14 +15,18 @@ const {
 const roleAuthentication = require('../middlewares/RoleAuthentication');
 const router = express.Router();
 
-router.get('/:id/items/:itemsId', roleAuthentication(['hr']), viewController);
-router.post('/:id/items', addItemController);
-router.put('/:id/items', roleAuthentication(['hr']), approveController);
-router.delete('/:id/items/:itemsId', removeItemController);
 router.post('/', fileController);
 router.put('/:id', roleAuthentication(['hr']), configureMinAmount);
-
 router.get('/:id/print', printController);
 router.post('/:id/submit', submitController);
+router.post('/:id/items', addItemController);
+router.put('/:id/items', roleAuthentication(['hr']), approveController);
+router.get('/:id/items/:itemsId', roleAuthentication(['hr']), viewController);
+router.delete('/:id/items/:itemsId', removeItemController);
+router.get(
+  '/employees',
+  roleAuthentication(['hr']),
+  searchByEmployeeController
+);
 
 module.exports = router;

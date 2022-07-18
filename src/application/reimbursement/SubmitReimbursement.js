@@ -1,10 +1,24 @@
 const ApiError = require('../../error-handler/ApiError');
 
-const SubmitReimbursement = ({ cutoffRepository, reimbursementRepository }) => {
+const SubmitReimbursement = ({
+  cutoffRepository,
+  reimbursementRepository,
+  reimbursementItemRepository,
+}) => {
   return async (id = '') => {
     const reimbursement = await reimbursementRepository.findById(id);
     if (!reimbursement) {
       throw new ApiError('Reimbursement not found', 400);
+    }
+
+    if (reimbursement.reimbursement_status === 'SUBMITTED') {
+      throw new ApiError('Reimbursement is already submitted', 400);
+    }
+
+    const reimbursementItem =
+      await reimbursementItemRepository.findByReimbursementId(id);
+    if (reimbursementItem.length === 0) {
+      throw new ApiError('Cannot submit an empty reimbursement', 400);
     }
 
     const cutoff = await cutoffRepository.findById(reimbursement.cutoff_id);
@@ -14,10 +28,6 @@ const SubmitReimbursement = ({ cutoffRepository, reimbursementRepository }) => {
 
     if (cutoff.cutoff_end_date < new Date()) {
       throw new ApiError('Cutoff is already closed', 400);
-    }
-
-    if (reimbursement.reimbursement_status === 'SUBMITTED') {
-      throw new ApiError('Reimbursement is already submitted', 400);
     }
 
     await reimbursementRepository.updateStatus(id, 'SUBMITTED');

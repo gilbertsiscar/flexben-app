@@ -4,6 +4,7 @@ const {
   fileReimbursement,
   printReimbursement,
   submitReimbursement,
+  searchByEmployee,
 } = require('../application/reimbursement');
 const MakeReponse = require('../MakeResponse');
 
@@ -22,7 +23,7 @@ exports.viewController = async (req, res, next) => {
     const { id, itemsId } = req.params;
     const reimbursement = await viewDetailsReimbursement(id, itemsId);
     const status = 200;
-    res.status(status).json(MakeReponse(status, { reimbursement }));
+    res.status(status).json(MakeReponse(status, reimbursement));
   } catch (error) {
     next(error);
   }
@@ -43,9 +44,9 @@ exports.approveController = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { decision } = req.body;
-    const approve = await approvalReimbursement(id, decision);
+    const reimbursement = await approvalReimbursement(id, decision);
     const status = 200;
-    res.status(status).json(MakeReponse(status, { approve }));
+    res.status(status).json(MakeReponse(status, { reimbursement }));
   } catch (error) {
     next(error);
   }
@@ -53,12 +54,22 @@ exports.approveController = async (req, res, next) => {
 
 exports.printController = async (req, res, next) => {
   try {
-    const text = await printReimbursement(req.params.id);
+    const { text, fileName } = await printReimbursement(req.params.id);
     res.set({
       'Content-Type': 'text/plain',
-      'Content-Disposition': 'attachment; filename="myfile.txt"',
+      'Content-Disposition': `attachment; filename=${fileName}.txt`,
     });
     res.send(text);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.searchByEmployeeController = async (req, res, next) => {
+  try {
+    const reimbursement = await searchByEmployee(req.query);
+    const status = 200;
+    res.status(status).json(MakeReponse(status, reimbursement));
   } catch (error) {
     next(error);
   }

@@ -1,7 +1,9 @@
 const {
+  categoryRepository,
   cutoffRepository,
   reimbursementRepository,
   reimbursementItemRepository,
+  employeeRepository,
 } = require('../../repositories');
 
 const ViewDetailsReimbursement = require('./ViewDetailsReimbursement');
@@ -18,7 +20,9 @@ const fileReimbursement = FileReimbursement({
 
 const PrintReimbursement = require('./PrintReimbursement');
 const printReimbursement = PrintReimbursement({
-  viewDetailsReimbursement,
+  categoryRepository,
+  reimbursementItemRepository,
+  reimbursementRepository,
 });
 
 const ApprovalReimbursement = require('./ApprovalReimbursement');
@@ -30,11 +34,14 @@ const SubmitReimbursement = require('./SubmitReimbursement');
 const submitReimbursement = SubmitReimbursement({
   cutoffRepository,
   reimbursementRepository,
+  reimbursementItemRepository,
 });
 
 const SearchByEmployee = require('./SearchByEmployee');
 const searchByEmployee = SearchByEmployee({
+  employeeRepository,
   reimbursementRepository,
+  reimbursementItemRepository,
 });
 
 module.exports = {
