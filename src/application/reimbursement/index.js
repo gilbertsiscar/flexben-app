@@ -28,6 +28,7 @@ const approvalReimbursement = ApprovalReimbursement({
 
 const SubmitReimbursement = require('./SubmitReimbursement');
 const submitReimbursement = SubmitReimbursement({
+  cutoffRepository,
   reimbursementRepository,
 });
 

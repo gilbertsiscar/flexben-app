@@ -1,3 +1,5 @@
+const ApiError = require('../../error-handler/ApiError');
+
 const RemoveReimbursementItem = ({
   reimbursementRepository,
   reimbursementItemRepository,
@@ -14,7 +16,16 @@ const RemoveReimbursementItem = ({
       throw new Error('Reimbursement is already submitted');
     }
 
-    return reimbursementItemRepository.remove(reimbursementItemId);
+    const removedItem = await reimbursementItemRepository.remove(
+      reimbursementItemId
+    );
+    if (removedItem.affectedRows === 0) {
+      throw new ApiError('Reimbursement item not found', 404);
+    }
+
+    return {
+      message: `Reimbursement item with id = ${reimbursementItemId} was removed successfully`,
+    };
   };
 };
 

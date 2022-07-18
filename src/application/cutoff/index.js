@@ -9,6 +9,12 @@ const viewReimbursementsByCutoff = ViewReimbursementsByCutoff({
   reimbursementRepository,
 });
 
+const AddCutoff = require('./AddCutoff');
+const addCutoff = AddCutoff({
+  cutoffRepository,
+});
+
 module.exports = {
   viewReimbursementsByCutoff,
+  addCutoff,
 };

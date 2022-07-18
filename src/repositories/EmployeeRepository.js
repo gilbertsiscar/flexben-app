@@ -10,6 +10,12 @@ class EmployeeRepository {
     return result[0];
   }
 
+  async findById(id = '') {
+    const sql = `SELECT * FROM employee e JOIN roles r ON e.role_id = r.role_id WHERE e.employee_id = ?`;
+    const result = await this.handleQuery(sql, [id]);
+    return result[0];
+  }
+
   handleQuery(sql, params) {
     return new Promise((resolve, reject) => {
       this.db.query(sql, params, (error, results) => {

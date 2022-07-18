@@ -12,9 +12,13 @@ const reimbursementRepository = ReimbursementRepository(db);
 const ReimbursementItemRepository = require('./ReimbursementItemRepository');
 const reimbursementItemRepository = ReimbursementItemRepository(db);
 
+const CategoryRepository = require('./CategoryRepository');
+const categoryRepository = CategoryRepository(db);
+
 module.exports = {
   cutoffRepository,
   employeeRepository,
   reimbursementRepository,
   reimbursementItemRepository,
+  categoryRepository,
 };

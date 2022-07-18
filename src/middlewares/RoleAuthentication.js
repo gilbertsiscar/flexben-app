@@ -1,7 +1,7 @@
 const ApiError = require('../error-handler/ApiError');
 
 module.exports = function roleAuthentication(role = []) {
-  return async function (req, _res, next) {
+  return async (req, _res, next) => {
     if (role.includes(req.role)) {
       next();
     } else {

@@ -7,9 +7,9 @@ const MakeReponse = require('../MakeResponse');
 exports.addItemController = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const addedItem = await addReimbursementItem.add(id, req.body);
+    const reimbursementItem = await addReimbursementItem.add(id, req.body);
     const status = 201;
-    res.status(status).json(MakeReponse(status, { addedItem }));
+    res.status(status).json(MakeReponse(status, { reimbursementItem }));
   } catch (error) {
     next(error);
   }
@@ -17,9 +17,9 @@ exports.addItemController = async (req, res, next) => {
 
 exports.removeItemController = async (req, res, next) => {
   try {
-    const { id, itemId } = req.params;
+    const { id, itemsId } = req.params;
 
-    const removeItem = await removeReimbursementItem(id, itemId);
+    const removeItem = await removeReimbursementItem(id, itemsId);
 
     const status = 200;
     res.status(status).json(MakeReponse(status, { removeItem }));

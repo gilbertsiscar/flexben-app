@@ -1,5 +1,11 @@
 const handleError = (error) => {
   switch (error.statusCode) {
+    case 400:
+      return {
+        statusCode: error.statusCode,
+        status: 'BAD_REQUEST',
+        message: error.message,
+      };
     case 404:
       return {
         statusCode: error.statusCode,

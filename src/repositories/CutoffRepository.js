@@ -9,6 +9,20 @@ class CutoffRepository {
     return result[0];
   }
 
+  save(cutoff = {}) {
+    const sql = `INSERT INTO cutoff (cutoff_start_date, cutoff_end_date, is_active, cutoff_cap_amount, cutoff_description) VALUES (?, ?, ?, ?, ?)`;
+
+    const params = [
+      cutoff.startDate,
+      cutoff.endDate,
+      cutoff.isActive,
+      cutoff.capAmount,
+      cutoff.description,
+    ];
+
+    return this.handleQuery(sql, params);
+  }
+
   handleQuery(sql = '', params = []) {
     return new Promise((resolve, reject) => {
       this.db.query(sql, params, (error, results) => {

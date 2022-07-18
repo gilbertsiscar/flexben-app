@@ -18,6 +18,8 @@ function printableForm(props = {}) {
     `;
 }
 
+function printDetails() {}
+
 module.exports = PrintReimbursement;
 
 // read categories from database

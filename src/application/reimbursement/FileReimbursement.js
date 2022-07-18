@@ -5,6 +5,10 @@ const FileReimbursement = ({ cutoffRepository, reimbursementRepository }) => {
       throw new Error('Cutoff not found');
     }
 
+    if (cutoff.cutoff_end_date < new Date()) {
+      throw new Error('Cutoff is already closed');
+    }
+
     const { insertId } = await reimbursementRepository.save({
       employeeId,
       cutoffId,
