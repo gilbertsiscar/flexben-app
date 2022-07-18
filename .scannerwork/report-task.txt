@@ -2,5 +2,5 @@ projectKey=flexben-app
 serverUrl=http://localhost:9000
 serverVersion=9.5.0.56709
 dashboardUrl=http://localhost:9000/dashboard?id=flexben-app
-ceTaskId=AYIPNqpmz7fhLVcPahp5
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYIPNqpmz7fhLVcPahp5
+ceTaskId=AYIQOuNIN3PIsCLz2tK1
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYIQOuNIN3PIsCLz2tK1

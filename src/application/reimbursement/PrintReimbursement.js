@@ -1,7 +1,6 @@
 const PrintReimbursement = ({ viewDetailsReimbursement }) => {
   return async (id = '') => {
-    const { reimbursement, reimbursementItems } =
-      await viewDetailsReimbursement(id);
+    const { reimbursement } = await viewDetailsReimbursement(id);
 
     return printableForm(reimbursement);
   };
@@ -17,8 +16,6 @@ function printableForm(props = {}) {
     Status: ${props.reimbursement_status}
     `;
 }
-
-function printDetails() {}
 
 module.exports = PrintReimbursement;
 
