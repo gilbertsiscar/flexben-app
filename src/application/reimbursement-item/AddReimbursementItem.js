@@ -30,6 +30,10 @@ const AddReimbursementItem = ({
         throw new ApiError('Reimbursement not found', 400);
       }
 
+      if (reimbursement.reimbursement_status === 'SUBMITTED') {
+        throw new ApiError('Reimbursement already submitted', 400);
+      }
+
       if (
         reimbursement.cutoff_cap_amount <
         reimbursementItem.amount + reimbursement.total_reimbursement_amount

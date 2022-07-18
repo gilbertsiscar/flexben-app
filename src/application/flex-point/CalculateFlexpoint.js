@@ -1,4 +1,4 @@
-const CalculateFlexpoint = ({}) => {
+const CalculateFlexpoint = () => {
   let tax = 0;
   const rate = 21.75; // idk what this is
   return {

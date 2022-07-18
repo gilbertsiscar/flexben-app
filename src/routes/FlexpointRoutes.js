@@ -6,6 +6,6 @@ const {
 const router = express.Router();
 
 router.get('/', calculatePoints);
-router.post('/', configureTax);
+router.put('/', configureTax);
 
 module.exports = router;

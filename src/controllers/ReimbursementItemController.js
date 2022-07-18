@@ -27,3 +27,19 @@ exports.removeItemController = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.configureMinAmount = async (req, res, next) => {
+  try {
+    const { minAmount } = req.body;
+    addReimbursementItem.setMinAmount(minAmount);
+
+    const status = 200;
+    res
+      .status(status)
+      .json(
+        MakeReponse(status, { amount: addReimbursementItem.getMinAmount() })
+      );
+  } catch (error) {
+    next(error);
+  }
+};

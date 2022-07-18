@@ -25,7 +25,7 @@ app.use('*', (_req, _res, next) => {
   next(new ApiError('Not Found', 404));
 });
 
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
   const error = handleError(err);
   res.status(error.statusCode).json({ error });
 });

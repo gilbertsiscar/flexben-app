@@ -2,13 +2,15 @@ const ViewReimbursementsByCutoff = ({
   cutoffRepository,
   reimbursementRepository,
 }) => {
-  return async (id = '') => {
-    const cutoff = await cutoffRepository.findById(id);
+  return async (cutoffId = '') => {
+    const cutoff = await cutoffRepository.findById(cutoffId);
     if (!cutoff) {
       throw new Error('Cutoff not found');
     }
 
-    const reimbursements = await reimbursementRepository.findByCutoffId(id);
+    const reimbursements = await reimbursementRepository.findByCutoffId(
+      cutoffId
+    );
 
     return {
       cutoff,

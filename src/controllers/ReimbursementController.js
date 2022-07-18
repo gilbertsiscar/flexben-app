@@ -19,8 +19,8 @@ exports.fileController = async (req, res, next) => {
 
 exports.viewController = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const reimbursement = await viewDetailsReimbursement(id);
+    const { id, itemsId } = req.params;
+    const reimbursement = await viewDetailsReimbursement(id, itemsId);
     const status = 200;
     res.status(status).json(MakeReponse(status, { reimbursement }));
   } catch (error) {
@@ -42,7 +42,8 @@ exports.submitController = async (req, res, next) => {
 exports.approveController = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const approve = await approvalReimbursement(id, req.body);
+    const { decision } = req.body;
+    const approve = await approvalReimbursement(id, decision);
     const status = 200;
     res.status(status).json(MakeReponse(status, { approve }));
   } catch (error) {
