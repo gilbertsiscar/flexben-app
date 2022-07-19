@@ -19,7 +19,8 @@ exports.logout = async (req, res, next) => {
 
   try {
     const status = 200;
-    res.status(status).json(MakeReponse(status, { token }));
+    const logout = await logoutService(token);
+    res.status(status).json(MakeReponse(status, logout));
   } catch (error) {
     next(error);
   }
