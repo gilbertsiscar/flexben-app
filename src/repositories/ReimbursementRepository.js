@@ -36,7 +36,6 @@ class ReimbursementRepository {
     return this.handleQuery(sql, [status, id]);
   }
 
-  // ¯\_(ツ)_/¯
   findByEmployeeDetails(filters = {}) {
     let sql = `SELECT r.* from reimbursement r JOIN employee e ON r.employee_id = e.employee_id`;
 
@@ -60,7 +59,6 @@ class ReimbursementRepository {
     if (condition) {
       sql += ` WHERE ${condition}`;
     }
-
     return this.handleQuery(sql, params);
   }
 

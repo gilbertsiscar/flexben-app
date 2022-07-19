@@ -4,10 +4,15 @@ const SearchByEmployee = ({
   reimbursementItemRepository,
 }) => {
   return async ({ id = '', firstName = '', lastName = '' }) => {
-    const employee = await employeeRepository.findById(id);
+    const employee = await employeeRepository.search({
+      employee_id: id,
+      firstname: firstName,
+      lastname: lastName,
+    });
     if (!employee) {
-      throw new Error('Employee not found');
+      throw new Error('Employee Not Found');
     }
+
     const reimbursements = await reimbursementRepository.findByEmployeeDetails({
       employee_id: id,
       firstname: firstName,
@@ -45,8 +50,8 @@ const SearchByEmployee = ({
     });
 
     return {
-      employeeName: `${employee.firstname} ${employee.lastname}`,
-      employeeNumber: employee.employee_number,
+      employeeName: `${employee[0].firstname} ${employee[0].lastname}`,
+      employeeNumber: `${employee[0].employee_number}`,
       reimbursements: mapReimbursements,
     };
   };
