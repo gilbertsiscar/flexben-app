@@ -2,14 +2,14 @@ const ViewDetailsReimbursement = ({
   reimbursementRepository,
   reimbursementItemRepository,
 }) => {
-  return async (id, itemsId = '') => {
+  return async (id) => {
     const reimbursement = await reimbursementRepository.findById(id);
     if (!reimbursement) {
       throw new Error('Reimbursement not found');
     }
 
     const reimbursementItems =
-      await reimbursementItemRepository.findByReimbursementId(itemsId);
+      await reimbursementItemRepository.findByReimbursementId(id);
 
     const mapItems = reimbursementItems.map((item) => {
       return {

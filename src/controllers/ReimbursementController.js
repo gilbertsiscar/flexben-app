@@ -20,8 +20,8 @@ exports.fileController = async (req, res, next) => {
 
 exports.viewController = async (req, res, next) => {
   try {
-    const { id, itemsId } = req.params;
-    const reimbursement = await viewDetailsReimbursement(id, itemsId);
+    const { id } = req.params;
+    const reimbursement = await viewDetailsReimbursement(id);
     const status = 200;
     res.status(status).json(MakeReponse(status, reimbursement));
   } catch (error) {
