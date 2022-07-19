@@ -21,6 +21,7 @@ const ViewDetailsReimbursement = ({
         },
         amount: item.amount,
         category: item.category_name,
+        status: item.reimbursement_details_status,
       };
     });
 

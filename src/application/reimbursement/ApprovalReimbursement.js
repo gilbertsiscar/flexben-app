@@ -22,7 +22,7 @@ const ApprovalReimbursement = ({ reimbursementRepository }) => {
     }
 
     await reimbursementRepository.updateStatus(id, decisions.get(decision));
-    return 'Reimbursement is ${decision}';
+    return `Reimbursement is ${decision}`;
   };
 };
 
